@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link rel="stylesheet" href="css/styles.css" />
+    <script src="js/code.js"></script>
+  </head>
+  <body>
+    <section class="container forms">
+      <div class="form login">
+        <div class="form-content">
+          <header>Welcome Back</header>
+          <form action="#">
+            <div class="field input-field">
+              <input
+                type="username"
+                placeholder="UserName"
+                class="input"
+                id="loginName"
+              />
+            </div>
+
+            <div class="field input-field">
+              <input
+                type="password"
+                placeholder="Password"
+                class="input"
+                id="loginPassword"
+              />
+            </div>
+
+            <div class="field button-field">
+              <button type="button" onclick="doLogin();">Login</button>
+            </div>
+          </form>
+
+          <div class="form-link">
+            <span
+              >Don't have an account?
+              <a href="#" class="link signup-link" onclick="toggle();"
+                >Register Now</a
+              ></span
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Register form -->
+
+      <div class="form signup">
+        <div class="form-content">
+          <header>Register</header>
+          <form action="#">
+            <div class="field input-field">
+              <input type="username" placeholder="UserName" class="input" />
+            </div>
+
+            <div class="field input-field">
+              <input type="password" placeholder="Password" id="createpass" />
+            </div>
+
+            <div class="field input-field">
+              <input
+                type="password"
+                placeholder="Confirm password"
+                id="confirmpass"
+              />
+            </div>
+            <span
+              style="
+                margin: auto;
+                display: table;
+                color: gold;
+                font-size: 25px;
+                padding-top: 10px;
+              "
+              id="loginResult"
+            ></span>
+            <div class="field button-field">
+              <button type="button" onclick="doRegister();">
+                Register Now
+              </button>
+            </div>
+          </form>
+
+          <div class="form-link">
+            <span
+              >Already have an account?
+              <a href="#" class="link login-link" onclick="toggle();"
+                >Login</a
+              ></span
+            >
+          </div>
+        </div>
+      </div>
+    </section>
+  </body>
+</html>

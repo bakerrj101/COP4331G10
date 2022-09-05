@@ -43,7 +43,7 @@ CREATE TABLE IF NOT EXISTS `COP4331_G10_db`.`Users` (
     `FirstName` VARCHAR(50) NOT NULL DEFAULT '', 
     `LastName` VARCHAR(50) NOT NULL DEFAULT '', 
     `Login` VARCHAR(50) NOT NULL DEFAULT '', 
-    `Password` VARCHAR(50) NOT NULL DEFAULT '', 
+    `Password` VARCHAR(64) NOT NULL DEFAULT '', 
     PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
 

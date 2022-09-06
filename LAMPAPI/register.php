@@ -1,5 +1,9 @@
 <?php
 
+    ini_set('display_errors', 1);
+    ini_set('display_startup_errors', 1);
+    error_reporting(E_ALL);
+
     $inData = getRequestInfo();
 	
     $servername = "localhost";
@@ -7,6 +11,7 @@
     $password = "WeLoveCOP4331WithLeinecker";
     $db = "COP4331_G10_db";
     $conn = new mysqli($servername, $username, $password, $db);
+
 
     if($conn->connect_error){
         returnWithError( $conn->connect_error );
@@ -20,18 +25,21 @@
         
         $stmt = $conn->prepare("SELECT COUNT(*) FROM Users WHERE `Login` = ?");
 
-        $stmt->bind_param("s", $inData["login"]);
-        $stmt->execute();
+        $stmt->bind_param("s", $Username);
+
+        if ( ! $stmt->execute()) {
+            trigger_error('The query execution failed; MySQL said ('.$stmt->errno.') '.$stmt->error, E_USER_ERROR);
+        }
+
+        $count = null;
         $stmt->bind_result($count);
-        $stmt->fetch();
-        $stmt->close();
+        while ($stmt->fetch()) { 
+            $count;
+        }
+        $stmt->close();        
 
         if($count > 0) {
-            echo 'username exists';
-            echo '<script type = "text/javascript">';
-            echo 'alert("Username is taken!")';
-            echo 'window.location.href = "register.php';
-            echo '</script>';
+            returnWithError("username already exists");
         }else {
             $stmt = $conn->prepare("INSERT INTO Users (`FirstName`, `LastName`, `Login`, `Password`) VALUES (?, ?, ?, ?);");
             $stmt->bind_param("ssss", $firstName, $lastName, $Username, $hash);
@@ -43,7 +51,6 @@
         }
     
         $conn->close();
-        echo 'end';
     }
 
     function getRequestInfo()

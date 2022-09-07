@@ -24,18 +24,10 @@
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-		if( $row = $result->fetch_assoc()  )
-   		{
-        	returnWithInfo($id, $row['firstName'], $row['lastName'], $row['phoneNumber'],  $row['email'], $row['address'], $row['zip'], $row['city'], $row['state'], $userId);
-    	}
-    	else
-    	{
-        	returnWithError("Contact Update Failed");
-    	}
+       	returnWithInfo( $id, $firstName, $lastName, $phoneNumber, $email, $address, $zip, $city, $state, $userId );
 	
 		$stmt->close();
 		$conn->close();
-		returnWithError("");
 	}
 
 	function getRequestInfo()
@@ -57,7 +49,7 @@
 
 	function returnWithInfo( $id, $firstName, $lastName, $phoneNumber, $email, $address, $zip, $city, $state, $userId )
 	{
-    	$retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","phoneNumber":"' . $phoneNumber . '", "email":"' . $email . '", "address":"' . $address . '", "zip":"' . $zip . '", "city":"' . $city . '", "state":"' . $state . '", "userId":"' . $userId . '","error":""}';
+    	$retValue = '{"id":"' . $id . '", "firstName" : "' . $firstName. '", "lastName" : "' . $lastName. '", "phoneNumber" : "' . $phoneNumber. '", "email" : "' . $email. '", "address" : "' . $address. '", "zip" : "' . $zip. '", "city" : "' . $city. '", "state" : "' . $state. '", "userId" : "' . $userId. '"}';
     	sendResultInfoAsJson( $retValue );
 	}
 	

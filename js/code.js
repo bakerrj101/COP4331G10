@@ -1,4 +1,4 @@
-const urlBase = "http://g10contactmanager.live/LAMPAPI";
+const urlBase = "http://G10CONTACTMANAGER.LIVE/LAMPAPI";
 const extension = "php";
 
 let userId = 0;
@@ -33,11 +33,11 @@ function doLogin() {
       if (this.readyState == 4 && this.status == 200) {
         let jsonObject = JSON.parse(xhr.responseText);
         userId = jsonObject.id;
-        console.log(userId);
-
-        if (userId < 1) {
+        console.log(jsonObject);
+        console.log(jsonObject.error);
+        if (jsonObject.error === "No Records Found") {
           document.getElementById("loginResult").innerHTML =
-            "User/Password combination incorrect";
+            "User/Password Combination Incorrect";
           return;
         }
 
@@ -61,4 +61,19 @@ function doRegister() {
   if (create != confirm)
     document.getElementById("registerResult").innerHTML =
       "Passwords do not match!";
+}
+
+function saveCookie() {
+  let minutes = 20;
+  let date = new Date();
+  date.setTime(date.getTime() + minutes * 60 * 1000);
+  document.cookie =
+    "firstName=" +
+    firstName +
+    ",lastName=" +
+    lastName +
+    ",userId=" +
+    userId +
+    ";expires=" +
+    date.toGMTString();
 }

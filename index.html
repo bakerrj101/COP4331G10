@@ -10,6 +10,9 @@
     <script src="js/code.js"></script>
   </head>
   <body>
+    <!-- <div class="header">
+      <h1>Contact Manager</h1>
+    </div> -->
     <section class="container forms">
       <div class="form login">
         <div class="form-content">
@@ -32,7 +35,16 @@
                 id="loginPassword"
               />
             </div>
-
+            <span
+              style="
+                margin: auto;
+                display: table;
+                color: gold;
+                font-size: 25px;
+                padding-top: 10px;
+              "
+              id="loginResult"
+            ></span>
             <div class="field button-field">
               <button type="button" onclick="doLogin();">Login</button>
             </div>
@@ -78,7 +90,7 @@
                 font-size: 25px;
                 padding-top: 10px;
               "
-              id="loginResult"
+              id="registerResult"
             ></span>
             <div class="field button-field">
               <button type="button" onclick="doRegister();">

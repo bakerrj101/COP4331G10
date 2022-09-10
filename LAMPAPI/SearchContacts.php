@@ -12,7 +12,7 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID, firstName, lastName from Contacts where UserID=?");
+		$stmt = $conn->prepare("SELECT ID, firstName, lastName, email, phoneNumber, address, city, state, zip from Contacts where UserID=?");
 		$stmt->bind_param("s", $inData["userId"]);
 		$stmt->execute();
 		
@@ -25,7 +25,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-            $searchResults .= '{"FirstName" : "' . $row["firstName"]. '", "LastName" : "' . $row["lastName"]. '", "ID" : "' . $row["ID"]. '"}';
+            $searchResults .= '{"id":"' . $row["ID"] . '", "firstName" : "' . $row["firstName"]. '", "lastName" : "' . $row["lastName"]. '", "phoneNumber" : "' . $row["phoneNumber"]. '", "email" : "' . $row["email"]. '", "address" : "' . $row["address"]. '", "zip" : "' . $row["zip"]. '", "city" : "' . $row["city"]. '", "state" : "' . $row["state"]. '", "userId" : "' . $inData["userId"]. '"}';
 		}
 		
 		if( $searchCount == 0 )

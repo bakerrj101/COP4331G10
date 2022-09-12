@@ -5,6 +5,10 @@
     error_reporting(E_ALL);
 
     $inData = getRequestInfo();
+
+    $id = 0;
+    $firstName = "";
+    $lastName = "";
 	
     $servername = "localhost";
     $username = "G10ApiAccessUser";
@@ -16,12 +20,12 @@
     if($conn->connect_error){
         returnWithError( $conn->connect_error );
     }  
-    if(isset($inData["input"], $inData["createpass"])){
+    if(isset($inData["login"], $inData["password"])){
         
         $firstName = $inData['firstName'];
         $lastName = $inData['lastName'];
-        $Username = $inData['input'];
-        $hash = HASH('sha256', $inData['createpass'], false);
+        $Username = $inData['login'];
+        $hash = HASH('sha256', $inData['password'], false);
         
         $stmt = $conn->prepare("SELECT COUNT(*) FROM Users WHERE `Login` = ?");
 
@@ -36,20 +40,31 @@
         while ($stmt->fetch()) { 
             $count;
         }
-        $stmt->close();        
+              
 
         if($count > 0) {
             returnWithError("username already exists");
         }else {
-            $stmt = $conn->prepare("INSERT INTO Users (`FirstName`, `LastName`, `Login`, `Password`) VALUES (?, ?, ?, ?);");
+            $stmt = $conn->prepare("INSERT INTO Users (`firstName`, `lastName`, `login`, `password`) VALUES (?, ?, ?, ?);");
             $stmt->bind_param("ssss", $firstName, $lastName, $Username, $hash);
             $stmt->execute();
+
+
+            $stmt = $conn->prepare("SELECT ID,firstName,lastName FROM Users WHERE Login=? AND Password =?");
+            $stmt->bind_param("ss", $Username, $hash);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            if( $row = $result->fetch_assoc())
+            {
+			    returnWithInfo( $row['firstName'], $row['lastName'], $row['ID'] );
+            }
+            //echo 'account successfully added';
             echo '<script type = "text/javascript">';
             echo 'alert("your account has been added!")';
             echo 'window.location.href = "register.php';
             echo '</script>';
         }
-    
+        $stmt->close(); 
         $conn->close();
     }
 
@@ -68,5 +83,10 @@
         sendResultInfoAsJson( $retValue );
         exit();
     }
+    function returnWithInfo( $firstName, $lastName, $id )
+	{
+        $retValue = '{"id":' . $id . ',"firstName":"' . $firstName . '","lastName":"' . $lastName . '","error":""}';
+		sendResultInfoAsJson( $retValue );
+	}
 
 ?>

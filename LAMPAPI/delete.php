@@ -16,8 +16,8 @@
     if($conn->connect_error){
         returnWithError($conn->connect_error);
     } else {
-        $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID=?");
-        $stmt->bind_param("s", $inData["userId"]);
+        $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID=? AND UserID=?");
+        $stmt->bind_param("ss", $inData["ID"], $inData["userId"], );
         $stmt->execute();
         if($stmt->affected_rows < 1){
             returnWithError("No Records Found");

@@ -54,13 +54,61 @@ function doLogin() {
   }
 }
 
-function doRegister() {
-  let create = document.getElementById("createpass").value;
-  let confirm = document.getElementById("confirmpass").value;
-  if (create != confirm)
-    document.getElementById("registerResult").innerHTML =
-      "Passwords do not match!";
+function doRegister() 
+{
+  // get data from user
+  let firstName = document.getElementById("firstName").value;
+  let lastName = document.getElementById("lastName").value;
+  let login = document.getElementById("login").value;
+  let password = document.getElementById("createpass").value;
+  let confirmPassword = document.getElementById("confirmpass").value;
+
+  document.getElementById("loginResult").innerHTML = "";
+
+  if (password != confirmPassword)
+  {
+    document.getElementById("loginResult").innerHTML = "Passwords do not match!";
+  }
+
+  // make data into a json
+  let tmp = {FirstName: firstName, LastName: lastName, Login: login, Password: password};
+  let jsonPayload = JSON.stringify(tmp);
+  let url = urlBase + '/register.' + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try
+  {
+    xhr.onreadystatechange = function()
+    {
+      if (this.readyState == 4 && this.status == 200)
+      {
+        
+        let jsonObject = JSON.parse(xhr.responseText);
+        userId = jsonObject.id;
+        console.log(jsonObject);
+        console.log(jsonObject.error)
+
+        if (jsonObject.error == "username already exists")
+        {
+          document.getElementById("loginResult").innerHTML = "Username not avaliable";
+          return;
+        }
+
+        saveCookie();
+
+        location.href = "main.html"
+      }
+    };
+    xhr.send(jsonPayload);
+  }
+  catch(err)
+  {
+    document.getElementById("loginResult").innerHTML = err.message;
+  }
 }
+
 
 function saveCookie() {
   let minutes = 20;

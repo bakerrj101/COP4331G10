@@ -63,15 +63,16 @@ function doRegister()
   let password = document.getElementById("createpass").value;
   let confirmPassword = document.getElementById("confirmpass").value;
 
-  document.getElementById("loginResult").innerHTML = "";
+  document.getElementById("registerResult").innerHTML = "";
 
   if (password != confirmPassword)
   {
-    document.getElementById("loginResult").innerHTML = "Passwords do not match!";
+    document.getElementById("registerResult").innerHTML = "Passwords do not match!";
+    return;
   }
 
   // make data into a json
-  let tmp = {FirstName: firstName, LastName: lastName, Login: login, Password: password};
+  let tmp = {firstName: firstName, lastName: lastName, login: login, password: password};
   let jsonPayload = JSON.stringify(tmp);
   let url = urlBase + '/register.' + extension;
 
@@ -92,20 +93,20 @@ function doRegister()
 
         if (jsonObject.error == "username already exists")
         {
-          document.getElementById("loginResult").innerHTML = "Username not avaliable";
+          document.getElementById("registerResult").innerHTML = "Username not avaliable";
           return;
         }
 
         saveCookie();
 
-        location.href = "main.html"
+        location.href = "main.html";
       }
     };
     xhr.send(jsonPayload);
   }
   catch(err)
   {
-    document.getElementById("loginResult").innerHTML = err.message;
+    document.getElementById("registerResult").innerHTML = err.message;
   }
 }
 

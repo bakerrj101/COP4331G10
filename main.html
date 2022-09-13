@@ -40,8 +40,8 @@
         </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Search">
-        <button class="btn btn-primary" type="button">Search</button>
+        <input class="form-control me-2" type="text" placeholder="Search" id ="searchText" onkeyup="searchContact(this.value);">
+        <button class="btn btn-primary" type="button" onclick="searchContact(this.value);">Search</button>
       </form>
     </div>
   </div>
@@ -73,7 +73,7 @@
           </thead>
           <tbody id="mytable">
             <tr>
-              <th scope="row" colspan="5">Loading...</th>
+              <td colspan="10" align='center'>Add some contacts using 'Create'</td>
             </tr>
           </tbody>
         </table>

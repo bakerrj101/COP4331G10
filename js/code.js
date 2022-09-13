@@ -10,7 +10,7 @@ function toggle() {
 }
 
 function doLogin() {
-  // userId = 0;
+  userId = 0;
   firstName = "";
   lastName = "";
 
@@ -33,12 +33,12 @@ function doLogin() {
       if (this.readyState == 4 && this.status == 200) {
         let jsonObject = JSON.parse(xhr.responseText);
         console.log(jsonObject);
-        // userId = jsonObject.id;
-        // if (jsonObject.error === "No Records Found") {
-        //   document.getElementById("loginResult").innerHTML =
-        //     "User/Password Combination Incorrect";
-        //   return;
-        // }
+        userId = jsonObject.id;
+        if (jsonObject.error === "No Records Found") {
+          document.getElementById("loginResult").innerHTML =
+            "User/Password Combination Incorrect";
+          return;
+        }
 
         firstName = jsonObject.firstName;
         lastName = jsonObject.lastName;
@@ -55,11 +55,57 @@ function doLogin() {
 }
 
 function doRegister() {
-  let create = document.getElementById("createpass").value;
-  let confirm = document.getElementById("confirmpass").value;
-  if (create != confirm)
+  // get data from user
+  let firstName = document.getElementById("firstName").value;
+  let lastName = document.getElementById("lastName").value;
+  let login = document.getElementById("login").value;
+  let password = document.getElementById("createpass").value;
+  let confirmPassword = document.getElementById("confirmpass").value;
+
+  document.getElementById("registerResult").innerHTML = "";
+
+  if (password != confirmPassword) {
     document.getElementById("registerResult").innerHTML =
       "Passwords do not match!";
+    return;
+  }
+
+  // make data into a json
+  let tmp = {
+    firstName: firstName,
+    lastName: lastName,
+    login: login,
+    password: password,
+  };
+  let jsonPayload = JSON.stringify(tmp);
+  let url = urlBase + "/register." + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try {
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        let jsonObject = JSON.parse(xhr.responseText);
+        userId = jsonObject.id;
+        console.log(jsonObject);
+        console.log(jsonObject.error);
+
+        if (jsonObject.error == "username already exists") {
+          document.getElementById("registerResult").innerHTML =
+            "Username not avaliable";
+          return;
+        }
+
+        saveCookie();
+
+        location.href = "main.html";
+      }
+    };
+    xhr.send(jsonPayload);
+  } catch (err) {
+    document.getElementById("registerResult").innerHTML = err.message;
+  }
 }
 
 function saveCookie() {
@@ -97,7 +143,7 @@ function readCookie() {
     window.location.href = "index.html";
   } else {
     // document.getElementById("userName").innerHTML =
-    //   "Logged in as " + firstName + " " + lastName;
+    //   "Welcome " + firstName + " " + lastName;
   }
 }
 
@@ -132,7 +178,7 @@ function immediateLoad() {
             jsonObject.results[i].id +
             ')">Edit</button>';
           table +=
-            '<button type="button" class="btn btn-outline-danger" onclick="userDelete(' +
+            '<button type="button" class="btn btn-outline-danger" onclick="deleteContact(' +
             jsonObject.results[i].id +
             ')">Del</button></td>';
           table += "</tr>";
@@ -289,6 +335,93 @@ function createContact() {
           title: "Contact Created",
         });
         immediateLoad();
+      }
+    };
+    xhr.send(jsonPayload);
+  } catch (err) {
+    console.log("sad");
+  }
+}
+
+function deleteContact(id) {
+  let tmp = { userId: userId, ID: id };
+  let jsonPayload = JSON.stringify(tmp);
+
+  let url = urlBase + "/delete." + extension;
+
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  console.log("gets called");
+  try {
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        Swal.fire({
+          title: "Contact Deleted",
+        });
+        immediateLoad();
+      }
+    };
+    xhr.send(jsonPayload);
+  } catch (err) {
+    console.log("sad");
+  }
+}
+
+function doLogout() {
+  userId = 0;
+  firstName = "";
+  lastName = "";
+  document.cookie = "firstName= ; expires = Thu, 01 Jan 1970 00:00:00 GMT";
+  window.location.href = "index.html";
+}
+
+function searchContact() {
+  let table = "";
+  let srch = document.getElementById("searchText").value;
+
+  let tmp = { search: srch, UserID: userId };
+  let jsonPayload = JSON.stringify(tmp);
+
+  let url = urlBase + "/InputSearchContacts." + extension;
+
+  console.log("reached search");
+  let xhr = new XMLHttpRequest();
+  xhr.open("POST", url, true);
+  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  try {
+    xhr.onreadystatechange = function () {
+      if (this.readyState == 4 && this.status == 200) {
+        let jsonObject = JSON.parse(xhr.responseText);
+        console.log(jsonObject);
+        if (jsonObject.error == "No Records Found") {
+          table += `<tr>`;
+          table += "<td align=center colspan=10> No Records Found" + "</td>";
+          table += "</tr>";
+        } else {
+          for (let i = 0; i < jsonObject.results.length; i++) {
+            table += `<tr id = ${jsonObject.results[i].id}>`;
+            table += "<td>" + jsonObject.results[i].id + "</td>";
+            table += "<td>" + jsonObject.results[i].firstName + "</td>";
+            table += "<td>" + jsonObject.results[i].lastName + "</td>";
+            table += "<td>" + jsonObject.results[i].phoneNumber + "</td>";
+            table += "<td>" + jsonObject.results[i].email + "</td>";
+            table += "<td>" + jsonObject.results[i].address + "</td>";
+            table += "<td>" + jsonObject.results[i].city + "</td>";
+            table += "<td>" + jsonObject.results[i].state + "</td>";
+            table += "<td>" + jsonObject.results[i].zip + "</td>";
+            table +=
+              '<td><button type="button" class="btn btn-outline-secondary" onclick="editBox(' +
+              jsonObject.results[i].id +
+              ')">Edit</button>';
+            table +=
+              '<button type="button" class="btn btn-outline-danger" onclick="deleteContact(' +
+              jsonObject.results[i].id +
+              ')">Del</button></td>';
+            table += "</tr>";
+          }
+        }
+        document.getElementById("mytable").innerHTML = table;
       }
     };
     xhr.send(jsonPayload);

@@ -19,7 +19,7 @@
           <header>Welcome Back</header>
           <form action="#">
             <div class="field input-field">
-              <h1 class="input-description">User Name:</h1>
+              <label for="loginName" class="input-description">User Name:</label>
               <input
                 type="username"
                 placeholder="UserName"
@@ -29,7 +29,7 @@
             </div>
 
             <div class="field input-field">
-              <h1 class="input-description">Password:</h1>
+              <label for="loginPassword" class="input-description">Password:</label>
               <input
                 type="password"
                 placeholder="Password"
@@ -70,17 +70,18 @@
           <header>Register</header>
           <form action="#">
             <div class="field input-field">
-              <h1 class="input-description">First Name:</h1>
+              <label for="firstName" class="input-description">First Name:</label>
               <input
                 type="text"
                 placeholder="First Name"
                 class="input"
                 id="firstName"
+                required minlength="1"
               />
             </div>
 
             <div class="field input-field">
-              <h1 class="input-description">Last Name:</h1>
+              <label for="lastName" class="input-description">Last Name:</label>
               <input
                 type="text"
                 placeholder="Last Name"
@@ -90,7 +91,7 @@
             </div>
 
             <div class="field input-field">
-              <h1 class="input-description">User Name:</h1>
+              <label for="login" class="input-description">User Name:</label>
               <input
                 type="username"
                 placeholder="User Name"
@@ -100,7 +101,7 @@
             </div>
 
             <div class="field input-field">
-              <h1 class="input-description" id="createpass text">Password:</h1>
+              <label for="createpass" class="input-description">Password:</label>
               <input 
                 type="password" 
                 placeholder="Password" 
@@ -108,7 +109,7 @@
             </div>
 
             <div class="field input-field">
-              <h1 class="input-description" id="confirmpass text">Confirm Password:</h1>
+              <label for="confirmpass" class="input-description">Confirm Password:</label>
               <input
                 type="password"
                 placeholder="Confirm password"

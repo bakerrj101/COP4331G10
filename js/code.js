@@ -1,7 +1,7 @@
 const urlBase = "http://G10CONTACTMANAGER.LIVE/LAMPAPI";
 const extension = "php";
 
-let userId = 1;
+let userId = 0;
 let firstName = "";
 let lastName = "";
 

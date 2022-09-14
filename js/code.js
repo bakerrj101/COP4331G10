@@ -67,7 +67,13 @@ function doRegister() {
   if (password != confirmPassword) {
     document.getElementById("registerResult").innerHTML =
       "Passwords do not match!";
+    document.getElementById("confirmpass text").innerHTML =
+      "*Confirm Password:";
     return;
+  }
+
+  if (firstName == "") {
+
   }
 
   // make data into a json

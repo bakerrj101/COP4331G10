@@ -24,6 +24,7 @@
 }
 .form {
   position: absolute;
+  max-height: 800px;
   max-width: 430px;
   width: 100%;
   padding: 30px;
@@ -83,6 +84,7 @@ form {
 }
 .field button:hover {
   background-color: gold;
+  color: black;
 }
 .form-link {
   text-align: center;
@@ -95,10 +97,11 @@ form {
   color: #232836;
 }
 .form a {
-  color: gold;
-  text-decoration: none;
+  color: darkgoldenrod;
+  text-decoration: underline;
 }
 .form-content a:hover {
+  color: gold;
   text-decoration: underline;
 }
 .line {

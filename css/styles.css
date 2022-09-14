@@ -119,3 +119,7 @@ form {
     padding: 20px 10px;
   }
 }
+
+.input-description {
+  font-size: medium;
+}

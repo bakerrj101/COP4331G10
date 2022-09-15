@@ -37,14 +37,14 @@ function doLogin() {
         if (jsonObject.error === "No Records Found") {
           document.getElementById("loginName").classList.add("err");
           document.getElementById("loginPassword").classList.add("err");
-          document.getElementById("loginResult").innerHTML =
+          document.getElementById("lErr").innerHTML =
             "***User/Password Combination Incorrect***";
           return false;
         }
         else {
           document.getElementById("loginName").classList.remove("err");
           document.getElementById("loginPassword").classList.remove("err");
-          document.getElementById("loginResult").innerHTML = "";
+          document.getElementById("lErr").innerHTML = "";
         }
 
         firstName = jsonObject.firstName;
@@ -113,9 +113,9 @@ function doRegister() {
         console.log(jsonObject.error);
 
         if (jsonObject.error == "username already exists") {
-          document.getElementById("firstName").classList.add("err");
-          document.getElementById("cFirstName").innerHTML =
-            "Username not avaliable";
+          document.getElementById("login").classList.add("err");
+          document.getElementById("cLogin").innerHTML =
+            "***Username not avaliable***";
           return false;
         }
         else {

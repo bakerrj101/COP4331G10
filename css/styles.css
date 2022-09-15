@@ -60,7 +60,7 @@ form {
   border-radius: 6px;
 }
 .input,
-#submit {
+.submit {
   height: 100%;
   width: 100%;
   border: none;
@@ -76,14 +76,14 @@ form {
 .input:focus {
   border-bottom-width: 2px;
 }
-#submit {
+.submit {
   color: #fff;
   height: 40px;
   background-color: black;
   transition: all 0.3s ease;
   cursor: pointer;
 }
-#submit:hover {
+.submit:hover {
   background-color: gold;
   color: black;
 }

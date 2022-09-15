@@ -35,9 +35,16 @@ function doLogin() {
         console.log(jsonObject);
         userId = jsonObject.id;
         if (jsonObject.error === "No Records Found") {
+          document.getElementById("loginName").classList.add("err");
+          document.getElementById("loginPassword").classList.add("err");
           document.getElementById("loginResult").innerHTML =
-            "User/Password Combination Incorrect";
-          return;
+            "***User/Password Combination Incorrect***";
+          return false;
+        }
+        else {
+          document.getElementById("loginName").classList.remove("err");
+          document.getElementById("loginPassword").classList.remove("err");
+          document.getElementById("loginResult").innerHTML = "";
         }
 
         firstName = jsonObject.firstName;
@@ -64,16 +71,24 @@ function doRegister() {
 
   document.getElementById("registerResult").innerHTML = "";
 
-  if (password != confirmPassword) {
-    document.getElementById("registerResult").innerHTML =
-      "Passwords do not match!";
-    document.getElementById("confirmpass text").innerHTML =
-      "*Confirm Password:";
-    return;
-  }
+  let validFirstName = check("firstName", "cFirstName");
+  let validLastName = check("lastName", "cLastName");
+  let validLogin = check("login", "cLogin");
+  let validPass = check("createpass", "cPass");
 
-  if (firstName == "") {
-
+  if (!validFirstName || !validLastName || !validLogin || !validPass) {
+    if (password != confirmPassword) {
+      document.getElementById("createpass").classList.add("err");
+      document.getElementById("confirmpass").classList.add("err");
+      document.getElementById("cConfirm").innerHTML =
+        "***Passwords do not match***";
+    }
+    else if (password == confirmPassword && validPass){
+      document.getElementById("createpass").classList.remove("err");
+      document.getElementById("confirmpass").classList.remove("err");
+      document.getElementById("cConfirm").innerHTML = "";
+    }
+    return false;
   }
 
   // make data into a json
@@ -98,9 +113,14 @@ function doRegister() {
         console.log(jsonObject.error);
 
         if (jsonObject.error == "username already exists") {
-          document.getElementById("registerResult").innerHTML =
+          document.getElementById("firstName").classList.add("err");
+          document.getElementById("cFirstName").innerHTML =
             "Username not avaliable";
-          return;
+          return false;
+        }
+        else {
+          document.getElementById("firstName").classList.remove("err");
+          document.getElementById("cFirstName").innerHTML = "";
         }
 
         saveCookie();
@@ -112,6 +132,24 @@ function doRegister() {
   } catch (err) {
     document.getElementById("registerResult").innerHTML = err.message;
   }
+}
+
+function check(fieldId, eFieldId) {
+  var valid = true, error = "", field="";
+
+  field = document.getElementById(fieldId);
+  error = document.getElementById(eFieldId);
+  
+  if (!field.checkValidity()) {
+    valid = false;
+    field.classList.add("err");
+    error.innerHTML = "***Must contain at least 1 character***"
+  }
+  else {
+    field.classList.remove("err");
+    error.innerHTML = "";
+  }
+  return valid;
 }
 
 function saveCookie() {

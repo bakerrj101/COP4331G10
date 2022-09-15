@@ -17,8 +17,7 @@
       <div class="form login">
         <div class="form-content">
           <header>Welcome Back</header>
-          <form action="#">
-            <div class="field input-field">
+          <form onsubmit="doLogin()" novalidate>
               <label for="loginName" class="input-description">User Name:</label>
               <input
                 type="username"
@@ -26,9 +25,7 @@
                 class="input"
                 id="loginName"
               />
-            </div>
 
-            <div class="field input-field">
               <label for="loginPassword" class="input-description">Password:</label>
               <input
                 type="password"
@@ -36,7 +33,6 @@
                 class="input"
                 id="loginPassword"
               />
-            </div>
             <span
               style="
                 margin: auto;
@@ -47,9 +43,7 @@
               "
               id="loginResult"
             ></span>
-            <div class="field button-field">
-              <button type="button" onclick="doLogin();">Login</button>
-            </div>
+            <input type="submit" value="Login" id="submit"></input>
           </form>
 
           <div class="form-link">
@@ -68,8 +62,7 @@
       <div class="form signup">
         <div class="form-content">
           <header>Register</header>
-          <form action="#">
-            <div class="field input-field">
+          <form onsubmit="doRegister()" novalidate>
               <label for="firstName" class="input-description">First Name:</label>
               <input
                 type="text"
@@ -78,44 +71,46 @@
                 id="firstName"
                 required minlength="1"
               />
-            </div>
+            <div id="cFirstName" class="emsg"></div>
 
-            <div class="field input-field">
               <label for="lastName" class="input-description">Last Name:</label>
               <input
                 type="text"
                 placeholder="Last Name"
                 class="input"
                 id="lastName"
+                required minlength="1"
               />
-            </div>
+            <div id="cLastName" class="emsg"></div>
 
-            <div class="field input-field">
               <label for="login" class="input-description">User Name:</label>
               <input
                 type="username"
                 placeholder="User Name"
                 class="input"
                 id="login"
+                required minlength="1"
               />
-            </div>
+            <div id="cLogin" class="emsg"></div>
 
-            <div class="field input-field">
               <label for="createpass" class="input-description">Password:</label>
               <input 
                 type="password" 
                 placeholder="Password" 
-                id="createpass" />
-            </div>
+                class="input"
+                id="createpass" 
+                required minlength="1"
+                />
+            <div id="cPass" class="emsg"></div>
 
-            <div class="field input-field">
               <label for="confirmpass" class="input-description">Confirm Password:</label>
               <input
                 type="password"
                 placeholder="Confirm password"
+                class="input"
                 id="confirmpass"
               />
-            </div>
+            <div id="cConfirm" class="emsg"></div>
             <span class="warning"
               style="
                 border-color: darkred ;
@@ -127,11 +122,7 @@
               "
               id="registerResult"
             ></span>
-            <div class="field button-field">
-              <button type="button" onclick="doRegister();">
-                Register Now
-              </button>
-            </div>
+              <input type="submit" value="Register Now" id="submit"></input>
           </form>
 
           <div class="form-link">

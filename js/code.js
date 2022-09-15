@@ -41,11 +41,6 @@ function doLogin() {
             "***User/Password Combination Incorrect***";
           return false;
         }
-        else {
-          document.getElementById("loginName").classList.remove("err");
-          document.getElementById("loginPassword").classList.remove("err");
-          document.getElementById("lErr").innerHTML = "";
-        }
 
         firstName = jsonObject.firstName;
         lastName = jsonObject.lastName;

@@ -23,10 +23,7 @@
             returnWithError("No Records Found");
         } else {
             returnWithInfo($inData["userId"]);
-            echo '<script type = "text/javascript">';
-            echo 'alert("records update successful")';
-            echo 'window.location.href = "delete.php';
-            echo '</script>';
+
         } 
         
 
@@ -52,7 +49,7 @@
     }
     function returnWithInfo($id )
     {
-        $retValue = '{"id":' . $id . '","error":""}';
+        $retValue = '{"id":' . $id . ',"error":""}';
         sendResultInfoAsJson( $retValue );
     }
 

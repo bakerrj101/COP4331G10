@@ -1,7 +1,7 @@
 <?php
 	$inData = getRequestInfo();
 	
-	$id = $inData["ID"];
+	$ID = $inData["ID"];
 	$firstName = $inData["firstName"];
 	$lastName = $inData["lastName"];
 	$phoneNumber = $inData["phoneNumber"];
@@ -10,7 +10,7 @@
 	$zip = $inData["zip"];
 	$city = $inData["city"];
 	$state = $inData["state"];
-	$userId = $inData["userId"];
+	$userID = $inData["userID"];
 
 	$conn = new mysqli("localhost", "G10ApiAccessUser", "WeLoveCOP4331WithLeinecker", "COP4331_G10_db");
 	if ($conn->connect_error) 
@@ -19,12 +19,12 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("UPDATE Contacts SET firstName=?, lastName=?, phoneNumber=?, email=?, address=?, zip=?, city=?, state=? WHERE ID = $id and userId = $userId");
+		$stmt = $conn->prepare("UPDATE Contacts SET firstName=?, lastName=?, phoneNumber=?, email=?, address=?, zip=?, city=?, state=? WHERE ID = $ID and userID = $userID");
 		$stmt->bind_param("ssssssss", $firstName, $lastName, $phoneNumber, $email, $address, $zip, $city, $state);
 		$stmt->execute();
 		$result = $stmt->get_result();
 
-       	returnWithInfo( $id, $firstName, $lastName, $phoneNumber, $email, $address, $zip, $city, $state, $userId );
+       	returnWithInfo( $ID, $firstName, $lastName, $phoneNumber, $email, $address, $zip, $city, $state, $userID );
 	
 		$stmt->close();
 		$conn->close();

@@ -17,12 +17,12 @@
         returnWithError($conn->connect_error);
     } else {
         $stmt = $conn->prepare("DELETE FROM Contacts WHERE ID=? AND UserID=?");
-        $stmt->bind_param("ss", $inData["ID"], $inData["userId"], );
+        $stmt->bind_param("ss", $inData["ID"], $inData["userID"], );
         $stmt->execute();
         if($stmt->affected_rows < 1){
             returnWithError("No Records Found");
         } else {
-            returnWithInfo($inData["userId"]);
+            returnWithInfo($inData["userID"]);
 
         } 
         

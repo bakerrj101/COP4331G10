@@ -13,7 +13,7 @@
 	else
 	{
 		$stmt = $conn->prepare("SELECT ID, firstName, lastName, email, phoneNumber, address, city, state, zip from Contacts where UserID=?");
-		$stmt->bind_param("s", $inData["userId"]);
+		$stmt->bind_param("s", $inData["userID"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
@@ -25,7 +25,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-            $searchResults .= '{"id":"' . $row["ID"] . '", "firstName" : "' . $row["firstName"]. '", "lastName" : "' . $row["lastName"]. '", "phoneNumber" : "' . $row["phoneNumber"]. '", "email" : "' . $row["email"]. '", "address" : "' . $row["address"]. '", "zip" : "' . $row["zip"]. '", "city" : "' . $row["city"]. '", "state" : "' . $row["state"]. '", "userId" : "' . $inData["userId"]. '"}';
+            $searchResults .= '{"id":"' . $row["ID"] . '", "firstName" : "' . $row["firstName"]. '", "lastName" : "' . $row["lastName"]. '", "phoneNumber" : "' . $row["phoneNumber"]. '", "email" : "' . $row["email"]. '", "address" : "' . $row["address"]. '", "zip" : "' . $row["zip"]. '", "city" : "' . $row["city"]. '", "state" : "' . $row["state"]. '", "userID" : "' . $inData["userID"]. '"}';
 		}
 		
 		if( $searchCount == 0 )

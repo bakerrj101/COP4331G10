@@ -23,22 +23,21 @@
   <body>
 <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
   <div class="container-fluid">
-    <img src="/images/Logo.jpg" alt="Contact Manager Logo" width="175" height="125"></img>
+    <img src="/images/Logo.jpg" alt="Contact Manager Logo" width="140" height="125"></img>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mynavbar">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="mynavbar">
       <ul class="navbar-nav me-auto">
-        <li class="nav-item">
-          <button class="nav-button" type="button" align="right" onclick="doLogout();">
-            Log Out
-          </button>
-        </li>
       </ul>
       <form class="d-flex">
-        <input class="form-control me-2" type="text" placeholder="Search" id ="searchText" onkeyup="searchContact(this.value);">
-        <button class="btn btn-primary" type="button" onclick="searchContact(this.value);">Search</button>
+        <input class="form-control me-md-2 me-lg-4" type="text" placeholder="Search" id ="searchText" onkeyup="searchContact(this.value);">
       </form>
+      <li class="nav-item">
+        <button class="nav-button" type="button" onclick="doLogout();">
+          Log Out
+        </button>
+      </li>
     </div>
   </div>
 </nav>

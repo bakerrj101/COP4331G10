@@ -216,7 +216,7 @@ function immediateLoad() {
         try {
           for (let i = 0; i < jsonObject.results.length; i++) {
             table += `<tr id = ${jsonObject.results[i].id}>`;
-            table += "<td>" + jsonObject.results[i].id + "</td>";
+            // table += "<td>" + jsonObject.results[i].id + "</td>";
             table += "<td>" + jsonObject.results[i].firstName + "</td>";
             table += "<td>" + jsonObject.results[i].lastName + "</td>";
             table += "<td>" + jsonObject.results[i].phoneNumber + "</td>";
@@ -239,7 +239,7 @@ function immediateLoad() {
         } catch (err) {
           document.getElementById(
             "mytable"
-          ).innerHTML = `<tr><td colspan="10" align="center">Add some contacts using 'Create'</td></tr>`;
+          ).innerHTML = `<tr><td colspan="9" align="center">Add some contacts using 'Create'</td></tr>`;
         }
       }
     };
@@ -257,32 +257,32 @@ function editBox(ID) {
   Swal.fire({
     title: "Edit User",
     html:
-      '<input id="id" type="hidden" value=' +
-      thetable[0].innerHTML +
-      ">" +
+      // '<input id="id" type="hidden" value=' +
+      // thetable[0].innerHTML +
+      // ">" +
       '<input id="firstName" class="swal2-input" placeholder="First" value="' +
-      thetable[1].innerHTML +
+      thetable[0].innerHTML +
       '">' +
       '<input id="lastName" class="swal2-input" placeholder="Last" value="' +
-      thetable[2].innerHTML +
+      thetable[1].innerHTML +
       '">' +
       '<input id="phoneNumber" class="swal2-input" placeholder="PhoneNumber" value="' +
-      thetable[3].innerHTML +
+      thetable[2].innerHTML +
       '">' +
       '<input id="email" class="swal2-input" placeholder="Email" value="' +
-      thetable[4].innerHTML +
+      thetable[3].innerHTML +
       '">' +
       '<input id="address" class="swal2-input" placeholder="Address" value="' +
-      thetable[5].innerHTML +
+      thetable[4].innerHTML +
       '">' +
       '<input id="city" class="swal2-input" placeholder="City" value="' +
+      thetable[5].innerHTML +
+      '">' +
+      '<input id="state" class="swal2-input" placeholder="State(Abbreviation)" value="' +
       thetable[6].innerHTML +
       '">' +
-      '<input id="state" class="swal2-input" placeholder="State" value="' +
-      thetable[7].innerHTML +
-      '">' +
       '<input id="zip" class="swal2-input" placeholder="Zip" value="' +
-      thetable[8].innerHTML +
+      thetable[7].innerHTML +
       '">',
     focusConfirm: false,
     showCloseButton: true,
@@ -347,8 +347,8 @@ function createBox() {
       '<input id="email" class="swal2-input" placeholder="Email" required>' +
       '<input id="address" class="swal2-input" placeholder="Address">' +
       '<input id="city" class="swal2-input" placeholder="City">' +
-      '<input id="zip" class="swal2-input" placeholder="Zip-Code">' +
-      '<input id="state" class="swal2-input" placeholder="State(Abbreviation)">',
+      '<input id="state" class="swal2-input" placeholder="State(Abbreviation)">' +
+      '<input id="zip" class="swal2-input" placeholder="Zip-Code">',
     focusConfirm: false,
     showCloseButton: true,
     showCancelButton: true,
@@ -409,7 +409,6 @@ function deleteContact(id) {
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-  console.log("gets called");
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {

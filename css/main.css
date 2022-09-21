@@ -19,6 +19,15 @@ td {
   line-height: 3rem;
 }
 
+.welcomeMessage {
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  padding: 20px 40px;
+  white-space: pre;
+  display: inline-block;
+}
+
 img {
   border-radius: 50%;
 }
@@ -28,4 +37,14 @@ img {
   padding: 0;
   box-sizing: border-box;
   font-family: "Chakra Petch";
+}
+a {
+  color: darkgoldenrod;
+  text-decoration: underline;
+  padding: 0px 10px;
+}
+
+a:hover {
+  color: gold;
+  text-decoration: underline;
 }

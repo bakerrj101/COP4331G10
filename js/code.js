@@ -35,7 +35,6 @@ function doLogin() {
         console.log(jsonObject);
         userId = jsonObject.id;
         if (jsonObject.error === "No Records Found") {
-          console.log("no work");
           document.getElementById("loginName").classList.add("err");
           document.getElementById("loginPassword").classList.add("err");
           document.getElementById("lErr").innerHTML =
@@ -59,8 +58,8 @@ function doLogin() {
 
 function doRegister() {
   // get data from user
-  let firstName = document.getElementById("firstName").value;
-  let lastName = document.getElementById("lastName").value;
+  firstName = document.getElementById("firstName").value;
+  lastName = document.getElementById("lastName").value;
   let login = document.getElementById("login").value;
   let password = document.getElementById("createpass").value;
   let confirmPassword = document.getElementById("confirmpass").value;
@@ -188,8 +187,9 @@ function readCookie() {
   if (userId < 0) {
     window.location.href = "index.html";
   } else {
-    // document.getElementById("userName").innerHTML =
-    //   "Welcome " + firstName + " " + lastName;
+    // let currentUser = firstName+" "+lastName;
+    // document.getElementById("welcome").innerHTML =
+    //   `Welcome back, ${currentUser}!`;
   }
 }
 
@@ -197,6 +197,11 @@ function immediateLoad() {
   let table = "";
   let tmp = { userId: userId };
   let jsonPayload = JSON.stringify(tmp);
+
+  let currentUser = firstName + " " + lastName;
+  document.getElementById(
+    "welcome"
+  ).innerHTML = `Welcome back, ${currentUser}!`;
 
   let url = urlBase + "/SearchContacts." + extension;
 

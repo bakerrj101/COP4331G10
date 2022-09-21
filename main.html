@@ -30,11 +30,12 @@
     <div class="collapse navbar-collapse" id="mynavbar">
       <ul class="navbar-nav me-auto">
       </ul>
+      <a href="https://youtu.be/YNvnid_Sm18">Help</a>
       <form class="d-flex">
         <input class="form-control me-md-2 me-lg-4" type="text" placeholder="Search" id ="searchText" onkeyup="searchContact(this.value);">
       </form>
       <li class="nav-item">
-        <button class="nav-button" type="button" onclick="doLogout();">
+        <button class="nav-button me-1" type="button" onclick="doLogout();">
           Log Out
         </button>
       </li>
@@ -44,7 +45,7 @@
 
     <div class="container">
       <div class="d-flex bd-highlight mb-3">
-        <div class="me-auto p-2 bd-highlight"><h2>G10</div>
+        <div id="welcome" class="welcomeMessage me-auto p-2 bd-highlight"><h2>G10</div>
         <div class="p-2 bd-highlight">
           <button type="button" class="btn btn-secondary" onclick="createBox()">Create</button>
         </div>

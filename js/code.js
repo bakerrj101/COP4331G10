@@ -181,8 +181,9 @@ function readCookie() {
   if (userId < 0) {
     window.location.href = "index.html";
   } else {
-    // document.getElementById("userName").innerHTML =
-    //   "Welcome " + firstName + " " + lastName;
+    let currentUser = firstName+" "+lastName;
+    document.getElementById("welcome").innerHTML =
+      `Welcome back, ${currentUser}!`;
   }
 }
 

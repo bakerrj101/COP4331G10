@@ -1,7 +1,7 @@
 const urlBase = "http://G10CONTACTMANAGER.LIVE/LAMPAPI";
 const extension = "php";
 
-let userId = 1;
+let userId = 0;
 let firstName = "";
 let lastName = "";
 
@@ -24,7 +24,7 @@ function doLogin() {
   let jsonPayload = JSON.stringify(tmp);
 
   let url = urlBase + "/Login." + extension;
-
+  console.log("started");
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
@@ -35,8 +35,11 @@ function doLogin() {
         console.log(jsonObject);
         userId = jsonObject.id;
         if (jsonObject.error === "No Records Found") {
-          document.getElementById("loginResult").innerHTML =
-            "User/Password Combination Incorrect";
+          console.log("no work");
+          document.getElementById("loginName").classList.add("err");
+          document.getElementById("loginPassword").classList.add("err");
+          document.getElementById("lErr").innerHTML =
+            "*User/Password Combination Incorrect*";
           return;
         }
 
@@ -64,9 +67,29 @@ function doRegister() {
 
   document.getElementById("registerResult").innerHTML = "";
 
-  if (password != confirmPassword) {
-    document.getElementById("registerResult").innerHTML =
-      "Passwords do not match!";
+  let validFirstName = check("firstName", "cFirstName");
+  let validLastName = check("lastName", "cLastName");
+  let validLogin = check("login", "cLogin");
+  let validPass = check("createpass", "cPass");
+  let validConfirmPass = check("confirmpass", "cConfirm");
+
+  if (
+    !validFirstName ||
+    !validLastName ||
+    !validLogin ||
+    !validPass ||
+    !validConfirmPass
+  ) {
+    if (password != confirmPassword) {
+      document.getElementById("createpass").classList.add("err");
+      document.getElementById("confirmpass").classList.add("err");
+      document.getElementById("cConfirm").innerHTML =
+        "*Passwords do not match*";
+    } else if (password == confirmPassword && validPass) {
+      document.getElementById("createpass").classList.remove("err");
+      document.getElementById("confirmpass").classList.remove("err");
+      document.getElementById("cConfirm").innerHTML = "";
+    }
     return;
   }
 
@@ -92,9 +115,13 @@ function doRegister() {
         console.log(jsonObject.error);
 
         if (jsonObject.error == "username already exists") {
-          document.getElementById("registerResult").innerHTML =
-            "Username not avaliable";
+          document.getElementById("login").classList.add("err");
+          document.getElementById("cLogin").innerHTML =
+            "*Username not avaliable*";
           return;
+        } else {
+          document.getElementById("firstName").classList.remove("err");
+          document.getElementById("cFirstName").innerHTML = "";
         }
 
         saveCookie();
@@ -106,6 +133,25 @@ function doRegister() {
   } catch (err) {
     document.getElementById("registerResult").innerHTML = err.message;
   }
+}
+
+function check(fieldId, eFieldId) {
+  var valid = true,
+    error = "",
+    field = "";
+
+  field = document.getElementById(fieldId);
+  error = document.getElementById(eFieldId);
+
+  if (!field.checkValidity()) {
+    valid = false;
+    field.classList.add("err");
+    error.innerHTML = "*Must contain at least 1 character*";
+  } else {
+    field.classList.remove("err");
+    error.innerHTML = "";
+  }
+  return valid;
 }
 
 function saveCookie() {
@@ -162,28 +208,34 @@ function immediateLoad() {
       if (this.readyState == 4 && this.status == 200) {
         let jsonObject = JSON.parse(xhr.responseText);
         console.log(jsonObject);
-        for (let i = 0; i < jsonObject.results.length; i++) {
-          table += `<tr id = ${jsonObject.results[i].id}>`;
-          table += "<td>" + jsonObject.results[i].id + "</td>";
-          table += "<td>" + jsonObject.results[i].firstName + "</td>";
-          table += "<td>" + jsonObject.results[i].lastName + "</td>";
-          table += "<td>" + jsonObject.results[i].phoneNumber + "</td>";
-          table += "<td>" + jsonObject.results[i].email + "</td>";
-          table += "<td>" + jsonObject.results[i].address + "</td>";
-          table += "<td>" + jsonObject.results[i].city + "</td>";
-          table += "<td>" + jsonObject.results[i].state + "</td>";
-          table += "<td>" + jsonObject.results[i].zip + "</td>";
-          table +=
-            '<td><button type="button" class="btn btn-outline-secondary" onclick="editBox(' +
-            jsonObject.results[i].id +
-            ')">Edit</button>';
-          table +=
-            '<button type="button" class="btn btn-outline-danger" onclick="deleteContact(' +
-            jsonObject.results[i].id +
-            ')">Del</button></td>';
-          table += "</tr>";
+        try {
+          for (let i = 0; i < jsonObject.results.length; i++) {
+            table += `<tr id = ${jsonObject.results[i].id}>`;
+            table += "<td>" + jsonObject.results[i].id + "</td>";
+            table += "<td>" + jsonObject.results[i].firstName + "</td>";
+            table += "<td>" + jsonObject.results[i].lastName + "</td>";
+            table += "<td>" + jsonObject.results[i].phoneNumber + "</td>";
+            table += "<td>" + jsonObject.results[i].email + "</td>";
+            table += "<td>" + jsonObject.results[i].address + "</td>";
+            table += "<td>" + jsonObject.results[i].city + "</td>";
+            table += "<td>" + jsonObject.results[i].state + "</td>";
+            table += "<td>" + jsonObject.results[i].zip + "</td>";
+            table +=
+              '<td><button type="button" class="btn btn-outline-secondary" onclick="editBox(' +
+              jsonObject.results[i].id +
+              ')">Edit</button>';
+            table +=
+              '<button type="button" class="btn btn-outline-danger" onclick="deleteContact(' +
+              jsonObject.results[i].id +
+              ')">Del</button></td>';
+            table += "</tr>";
+          }
+          document.getElementById("mytable").innerHTML = table;
+        } catch (err) {
+          document.getElementById(
+            "mytable"
+          ).innerHTML = `<tr><td colspan="10" align="center">Add some contacts using 'Create'</td></tr>`;
         }
-        document.getElementById("mytable").innerHTML = table;
       }
     };
     xhr.send(jsonPayload);
@@ -284,10 +336,10 @@ function createBox() {
     title: "Create Contact",
     html:
       '<input id="userId" type="hidden">' +
-      '<input id="firstName" class="swal2-input" placeholder="First">' +
-      '<input id="lastName" class="swal2-input" placeholder="Last">' +
-      '<input id="phoneNumber" class="swal2-input" placeholder="Phone Number">' +
-      '<input id="email" class="swal2-input" placeholder="Email">' +
+      '<input id="firstName" class="swal2-input" placeholder="First" required>' +
+      '<input id="lastName" class="swal2-input" placeholder="Last" required>' +
+      '<input id="phoneNumber" class="swal2-input" placeholder="Phone Number" required>' +
+      '<input id="email" class="swal2-input" placeholder="Email" required>' +
       '<input id="address" class="swal2-input" placeholder="Address">' +
       '<input id="city" class="swal2-input" placeholder="City">' +
       '<input id="zip" class="swal2-input" placeholder="Zip-Code">' +

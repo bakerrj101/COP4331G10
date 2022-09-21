@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 
 <html lang="en">
@@ -10,31 +11,38 @@
     <script src="js/code.js"></script>
   </head>
   <body>
+<img src="/images/Logo.jpg" alt="Contact Manager Logo" width="140" height="125" style="position:absolute;border-radius: 50%;"></img>
+
     <!-- <div class="header">
       <h1>Contact Manager</h1>
     </div> -->
+
     <section class="container forms">
       <div class="form login">
         <div class="form-content">
           <header>Welcome Back</header>
           <form action="#">
             <div class="field input-field">
+              <label for="loginName" class="input-description">User Name:</label>
               <input
                 type="username"
                 placeholder="UserName"
                 class="input"
                 id="loginName"
+                required
               />
             </div>
-
+              <label for="loginPassword" class="input-description">Password:</label>
             <div class="field input-field">
               <input
                 type="password"
                 placeholder="Password"
                 class="input"
                 id="loginPassword"
+                required
               />
             </div>
+            <div id="lErr" class="emsg" style="text-align:center"></div>
             <span
               style="
                 margin: auto;
@@ -46,10 +54,9 @@
               id="loginResult"
             ></span>
             <div class="field button-field">
-              <button type="button" onclick="doLogin();">Login</button>
+              <button type="button" class='submit'onclick="doLogin();">Login</button>
             </div>
           </form>
-
           <div class="form-link">
             <span
               >Don't have an account?
@@ -62,61 +69,72 @@
       </div>
 
       <!-- Register form -->
-
       <div class="form signup">
         <div class="form-content">
           <header>Register</header>
           <form action="#">
-            <div class="field input-field">
+              <label for="firstName" class="input-description">First Name:</label>
               <input
                 type="text"
-                placeholder="FirstName"
+                placeholder="First Name"
                 class="input"
                 id="firstName"
+                required minlength="1"
               />
-            </div>
+            <div id="cFirstName" class="emsg" style="text-align:center"></div>
 
-            <div class="field input-field">
+              <label for="lastName" class="input-description">Last Name:</label>
               <input
                 type="text"
-                placeholder="LastName"
+                placeholder="Last Name"
                 class="input"
                 id="lastName"
+                required minlength="1"
               />
-            </div>
+            <div id="cLastName" class="emsg" style="text-align:center"></div>
 
-            <div class="field input-field">
+              <label for="login" class="input-description">User Name:</label>
               <input
                 type="username"
-                placeholder="UserName"
+                placeholder="User Name"
                 class="input"
                 id="login"
+                required minlength="1"
               />
-            </div>
+            <div id="cLogin" class="emsg" style="text-align:center"></div>
 
-            <div class="field input-field">
-              <input type="password" placeholder="Password" id="createpass" />
-            </div>
+              <label for="createpass" class="input-description">Password:</label>
+              <input 
+                type="password" 
+                placeholder="Password" 
+                class="input"
+                id="createpass" 
+                required minlength="1"
+                />
+            <div id="cPass" class="emsg" style="text-align:center"></div>
 
-            <div class="field input-field">
+              <label for="confirmpass" class="input-description">Confirm Password:</label>
               <input
                 type="password"
                 placeholder="Confirm password"
+                class="input"
                 id="confirmpass"
+                required minlength="1"
               />
-            </div>
-            <span
+            <div id="cConfirm" class="emsg" style="text-align:center"></div>
+            <span class="warning"
               style="
+                border-color: darkred ;
                 margin: auto;
                 display: table;
-                color: gold;
-                font-size: 25px;
-                padding-top: 10px;
+                color: darkred;
+                font-size: 20px;
+                padding-top: 25px;
               "
               id="registerResult"
             ></span>
-            <div class="field button-field">
-              <button type="button" onclick="doRegister();">
+              <div class="field button-field">
+              <button type="button" class="submit" onclick="doRegister();">
                 Register Now
               </button>
             </div>

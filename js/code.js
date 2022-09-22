@@ -401,26 +401,26 @@ function createContact() {
 }
 
 function deleteContact(id) {
-  let tmp = { userId: userId, ID: id };
-  let jsonPayload = JSON.stringify(tmp);
+  let text = "Are you sure you want to delete contact?\nClick OK to confirm or Cancel to cancel.";
+  if (confirm(text) == true) {
+    let tmp = { userId: userId, ID: id };
+    let jsonPayload = JSON.stringify(tmp);
 
-  let url = urlBase + "/delete." + extension;
+    let url = urlBase + "/delete." + extension;
 
-  let xhr = new XMLHttpRequest();
-  xhr.open("POST", url, true);
-  xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-  try {
-    xhr.onreadystatechange = function () {
-      if (this.readyState == 4 && this.status == 200) {
-        Swal.fire({
-          title: "Contact Deleted",
-        });
-        immediateLoad();
-      }
-    };
-    xhr.send(jsonPayload);
-  } catch (err) {
-    console.log("sad");
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try {
+      xhr.onreadystatechange = function () {
+        if (this.readyState == 4 && this.status == 200) {
+          immediateLoad();
+        }
+      };
+      xhr.send(jsonPayload);
+    } catch (err) {
+      console.log("sad");
+    }
   }
 }
 

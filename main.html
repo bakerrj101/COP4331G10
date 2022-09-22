@@ -16,9 +16,16 @@
     <script type="text/javascript">
       document.addEventListener('DOMContentLoaded', function() {
         readCookie();
-        immediateLoad();
+        count = 1;
+        searchContact(count)
       }, false);
 
+    window.onscroll = function() {
+    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 5) {
+            count+=1;
+            searchContact(count);
+    }
+    };
     </script>
   </head>
   <body>

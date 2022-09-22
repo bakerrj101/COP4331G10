@@ -4,6 +4,7 @@ const extension = "php";
 let userId = 0;
 let firstName = "";
 let lastName = "";
+let table = "";
 
 function toggle() {
   document.querySelector(".forms").classList.toggle("show-signup");
@@ -324,9 +325,6 @@ function editContact(id) {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         // let jsonObject = JSON.parse(xhr.responseText);
-        Swal.fire({
-          title: "Contact Updated",
-        });
         searchContact(1);
       }
     };
@@ -448,8 +446,9 @@ function doLogout() {
 }
 
 function searchContact(page) {
-  let table = "";
+  console.log("reached search");
   let srch = document.getElementById("searchText").value;
+  if (page == 1) table = "";
 
   let tmp = { search: srch, UserID: userId, pageNumber: page };
   let jsonPayload = JSON.stringify(tmp);
@@ -471,10 +470,14 @@ function searchContact(page) {
         let jsonObject = JSON.parse(xhr.responseText);
         console.log(jsonObject);
         try {
-          if (jsonObject.error == "No Records Found") {
-            table += `<tr>`;
-            table += "<td align=center colspan=9> No Records Found" + "</td>";
-            table += "</tr>";
+          if (jsonObject.error == "No Records Found" && srch != "") {
+            document.getElementById(
+              "mytable"
+            ).innerHTML = `<tr><td colspan="9" align="center">No Records Found</td></tr>`;
+
+            // table += `<tr>`;
+            // table += "<td align=center colspan=9> No Records Found" + "</td>";
+            // table += "</tr>";
           } else {
             for (let i = 1; i < jsonObject.results.length; i++) {
               table += `<tr id = ${jsonObject.results[i].id}>`;
@@ -500,9 +503,10 @@ function searchContact(page) {
           }
           document.getElementById("mytable").innerHTML = table;
         } catch (err) {
-          document.getElementById(
-            "mytable"
-          ).innerHTML = `<tr><td colspan="9" align="center">Add some contacts using 'Create'</td></tr>`;
+          if (table == "")
+            document.getElementById(
+              "mytable"
+            ).innerHTML = `<tr><td colspan="9" align="center">Add some contacts using 'Create'</td></tr>`;
         }
       }
     };

@@ -23,6 +23,7 @@
     window.onscroll = function() {
     if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 5) {
             count+=1;
+            console.log("end")
             searchContact(count);
     }
     };
@@ -41,7 +42,13 @@
       <a>Help</a>
       <a href="https://youtu.be/YNvnid_Sm18">More Help</a>
       <form class="d-flex">
-        <input class="form-control me-md-2 me-lg-4" type="text" placeholder="Search" id ="searchText" onkeyup="searchContact(this.value);">
+        <input class="form-control me-md-2 me-lg-4" type="text" placeholder="Search" id ="searchText" onkeyup="tempSearch();">
+        <script>
+          function tempSearch() {
+            count = 1
+            searchContact(count)
+          }
+        </script>
       </form>
       <li class="nav-item">
         <button class="nav-button" type="button" onclick="doLogout();">

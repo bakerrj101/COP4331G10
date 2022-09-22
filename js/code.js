@@ -341,8 +341,10 @@ function createBox() {
     title: "Create Contact",
     html:
       '<input id="userId" type="hidden">' +
-      '<input id="firstName" class="swal2-input" placeholder="First" required>' +
-      '<input id="lastName" class="swal2-input" placeholder="Last" required>' +
+      '<input id="firstName" class="swal2-input" placeholder="First" required minlength="1">' +
+      '<div id="createFirst" class="emsg"></div>' +
+      '<input id="lastName" class="swal2-input" placeholder="Last" required minlength="1">' +
+      '<div id="createLast" class="emsg"></div>' +
       '<input id="phoneNumber" class="swal2-input" placeholder="Phone Number" required>' +
       '<input id="email" class="swal2-input" placeholder="Email" required>' +
       '<input id="address" class="swal2-input" placeholder="Address">' +
@@ -353,7 +355,13 @@ function createBox() {
     showCloseButton: true,
     showCancelButton: true,
     preConfirm: () => {
-      createContact();
+      let validFName = check("firstName", "createFirst");
+      let validLName = check("lastName", "createLast");
+      if (validFName && validLName) {
+        createContact();
+      } else {
+        return false;
+      }
     },
   });
 }
@@ -388,9 +396,6 @@ function createContact() {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
         // let jsonObject = JSON.parse(xhr.responseText);
-        Swal.fire({
-          title: "Contact Created",
-        });
         searchContact(1);
       }
     };
@@ -398,6 +403,19 @@ function createContact() {
   } catch (err) {
     console.log("sad");
   }
+}
+
+function deleteBox(id) {
+  Swal.fire({
+    title: "Are you sure you want to delete contact?",
+    focusConfirm: false,
+    showCancelButton: true,
+    confirmButtonText: "Confirm",
+    cancelButtonText: "Cancel",
+    preConfirm: () => {
+      deleteContact(id);
+    },
+  });
 }
 
 function deleteContact(id) {
@@ -412,10 +430,7 @@ function deleteContact(id) {
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        Swal.fire({
-          title: "Contact Deleted",
-        });
-        searchContact();
+        searchContact(1);
       }
     };
     xhr.send(jsonPayload);
@@ -477,7 +492,7 @@ function searchContact(page) {
                 jsonObject.results[i].id +
                 ')">Edit</button>';
               table +=
-                '<button type="button" class="btn btn-outline-danger" onclick="deleteContact(' +
+                '<button type="button" class="btn btn-outline-danger" onclick="deleteBox(' +
                 jsonObject.results[i].id +
                 ')">Del</button></td>';
               table += "</tr>";

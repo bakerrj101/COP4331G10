@@ -48,3 +48,15 @@ a:hover {
   color: gold;
   text-decoration: underline;
 }
+
+.err {
+  background: rgb(245, 201, 201);
+  border: 2px solid darkred;
+  color: black;
+}
+
+.emsg {
+  text-align: center;
+  color: darkred;
+  font-weight: bold;
+}

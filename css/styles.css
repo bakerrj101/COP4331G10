@@ -135,6 +135,7 @@ form {
 }
 
 .emsg {
+  text-align: center;
   color: darkred;
   font-weight: bold;
 }

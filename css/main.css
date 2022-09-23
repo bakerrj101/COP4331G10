@@ -66,3 +66,13 @@ a:hover {
   color: darkred;
   font-weight: bold;
 }
+
+.swal-wide {
+  width: 600px !important;
+}
+
+label {
+  display: inline-block;
+  width: 175px;
+  text-align: left;
+}

@@ -205,45 +205,62 @@ function editBox(ID) {
       // '<input id="id" type="hidden" value=' +
       // thetable[0].innerHTML +
       // ">" +
-      '<label for="firstName" class="input-description">**First Name:</label>' +
+      '<span style ="white-space:nowrap">' +
+      '<label for="firstName" class="input-description">*First Name:</label>' +
       '<input id="firstName" class="swal2-input" placeholder="First" value="' +
       thetable[0].innerHTML +
       '">' +
+      "</span>" +
       '<div id="createFirst" class="emsg"></div>' +
-      '<label for="lastName" class="input-description">**Last Name:</label>' +
+      '<span style ="white-space:nowrap">' +
+      '<label for="lastName" class="input-description">*Last Name:</label>' +
       '<input id="lastName" class="swal2-input" placeholder="Last" value="' +
       thetable[1].innerHTML +
       '">' +
+      "</span>" +
       '<div id="createLast" class="emsg"></div>' +
+      '<span style ="white-space:nowrap">' +
       '<label for="phoneNumber" class="input-description">Phone Number:</label>' +
       '<input id="phoneNumber" class="swal2-input" placeholder="PhoneNumber" value="' +
       thetable[2].innerHTML +
       '">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="email" class="input-description">Email:</label>' +
       '<input id="email" class="swal2-input" placeholder="Email" value="' +
       thetable[3].innerHTML +
       '">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="address" class="input-description">Address:</label>' +
       '<input id="address" class="swal2-input" placeholder="Address" value="' +
       thetable[4].innerHTML +
       '">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="city" class="input-description">City:</label>' +
       '<input id="city" class="swal2-input" placeholder="City" value="' +
       thetable[5].innerHTML +
       '">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="state" class="input-description">State(Abbreviation):</label>' +
       '<input id="state" class="swal2-input" placeholder="State(Abbreviation)" value="' +
       thetable[6].innerHTML +
       '">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="zip" class="input-description">Zip-Code:</label>' +
       '<input id="zip" class="swal2-input" placeholder="Zip" value="' +
       thetable[7].innerHTML +
       '">' +
-      '<div class="input-description">** denotes required fields</div>',
+      "</span>" +
+      '<div class="input-description">* denotes required fields</div>',
     focusConfirm: false,
     showCloseButton: true,
     showDenyButton: true,
     denyButtonText: "Cancel",
+    customClass: "swal-wide",
     preConfirm: () => {
       let validFName = check("firstName", "createFirst");
       let validLName = check("lastName", "createLast");
@@ -301,29 +318,46 @@ function createBox() {
     title: "Create Contact",
     html:
       '<input id="userId" type="hidden">' +
-      '<label for="firstName" class="input-description">**First Name:</label>' +
+      '<span style ="white-space:nowrap">' +
+      '<label for="firstName" class="input-description">*First Name:</label>' +
       '<input id="firstName" class="swal2-input" placeholder="First" required minlength="1">' +
+      "</span>" +
       '<div id="createFirst" class="emsg"></div>' +
-      '<label for="lastName" class="input-description">**Last Name:</label>' +
+      '<span style ="white-space:nowrap">' +
+      '<label for="lastName" class="input-description">*Last Name:</label>' +
       '<input id="lastName" class="swal2-input" placeholder="Last" required minlength="1">' +
+      "</span>" +
       '<div id="createLast" class="emsg"></div>' +
+      '<span style ="white-space:nowrap">' +
       '<label for="phoneNumber" class="input-description">Phone Number:</label>' +
       '<input id="phoneNumber" class="swal2-input" placeholder="Phone Number" required>' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="email" class="input-description">Email:</label>' +
       '<input id="email" class="swal2-input" placeholder="Email" required>' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="address" class="input-description">Address:</label>' +
       '<input id="address" class="swal2-input" placeholder="Address">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="city" class="input-description">City:</label>' +
       '<input id="city" class="swal2-input" placeholder="City">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="state" class="input-description">State(Abbreviation):</label>' +
       '<input id="state" class="swal2-input" placeholder="State(Abbreviation)">' +
+      "</span>" +
+      '<span style ="white-space:nowrap">' +
       '<label for="zip" class="input-description">Zip-Code:</label>' +
       '<input id="zip" class="swal2-input" placeholder="Zip-Code">' +
-      '<div class="input-description">** denotes required fields</div>',
+      "</span>" +
+      '<div class="input-description">* denotes required fields</div>',
     focusConfirm: false,
     showCloseButton: true,
     showDenyButton: true,
     denyButtonText: "Cancel",
+    customClass: "swal-wide",
     preConfirm: () => {
       let validFName = check("firstName", "createFirst");
       let validLName = check("lastName", "createLast");

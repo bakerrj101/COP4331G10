@@ -205,40 +205,40 @@ function editBox(ID) {
       // '<input id="id" type="hidden" value=' +
       // thetable[0].innerHTML +
       // ">" +
-      '<label for="firstName" class="input-description">**First Name:</label>'+
+      '<label for="firstName" class="input-description">**First Name:</label>' +
       '<input id="firstName" class="swal2-input" placeholder="First" value="' +
       thetable[0].innerHTML +
       '">' +
       '<div id="createFirst" class="emsg"></div>' +
-      '<label for="lastName" class="input-description">**Last Name:</label>'+
+      '<label for="lastName" class="input-description">**Last Name:</label>' +
       '<input id="lastName" class="swal2-input" placeholder="Last" value="' +
       thetable[1].innerHTML +
       '">' +
       '<div id="createLast" class="emsg"></div>' +
-      '<label for="phoneNumber" class="input-description">Phone Number:</label>'+
+      '<label for="phoneNumber" class="input-description">Phone Number:</label>' +
       '<input id="phoneNumber" class="swal2-input" placeholder="PhoneNumber" value="' +
       thetable[2].innerHTML +
       '">' +
-      '<label for="email" class="input-description">Email:</label>'+
+      '<label for="email" class="input-description">Email:</label>' +
       '<input id="email" class="swal2-input" placeholder="Email" value="' +
       thetable[3].innerHTML +
       '">' +
-      '<label for="address" class="input-description">Address:</label>'+
+      '<label for="address" class="input-description">Address:</label>' +
       '<input id="address" class="swal2-input" placeholder="Address" value="' +
       thetable[4].innerHTML +
       '">' +
-      '<label for="city" class="input-description">City:</label>'+
+      '<label for="city" class="input-description">City:</label>' +
       '<input id="city" class="swal2-input" placeholder="City" value="' +
       thetable[5].innerHTML +
       '">' +
-      '<label for="state" class="input-description">State(Abbreviation):</label>'+
+      '<label for="state" class="input-description">State(Abbreviation):</label>' +
       '<input id="state" class="swal2-input" placeholder="State(Abbreviation)" value="' +
       thetable[6].innerHTML +
       '">' +
-      '<label for="zip" class="input-description">Zip-Code:</label>'+
+      '<label for="zip" class="input-description">Zip-Code:</label>' +
       '<input id="zip" class="swal2-input" placeholder="Zip" value="' +
       thetable[7].innerHTML +
-      '">'+
+      '">' +
       '<div class="input-description">** denotes required fields</div>',
     focusConfirm: false,
     showCloseButton: true,
@@ -301,24 +301,24 @@ function createBox() {
     title: "Create Contact",
     html:
       '<input id="userId" type="hidden">' +
-      '<label for="firstName" class="input-description">**First Name:</label>'+
+      '<label for="firstName" class="input-description">**First Name:</label>' +
       '<input id="firstName" class="swal2-input" placeholder="First" required minlength="1">' +
       '<div id="createFirst" class="emsg"></div>' +
-      '<label for="lastName" class="input-description">**Last Name:</label>'+
+      '<label for="lastName" class="input-description">**Last Name:</label>' +
       '<input id="lastName" class="swal2-input" placeholder="Last" required minlength="1">' +
       '<div id="createLast" class="emsg"></div>' +
-      '<label for="phoneNumber" class="input-description">Phone Number:</label>'+
+      '<label for="phoneNumber" class="input-description">Phone Number:</label>' +
       '<input id="phoneNumber" class="swal2-input" placeholder="Phone Number" required>' +
-      '<label for="email" class="input-description">Email:</label>'+
+      '<label for="email" class="input-description">Email:</label>' +
       '<input id="email" class="swal2-input" placeholder="Email" required>' +
-      '<label for="address" class="input-description">Address:</label>'+
+      '<label for="address" class="input-description">Address:</label>' +
       '<input id="address" class="swal2-input" placeholder="Address">' +
-      '<label for="city" class="input-description">City:</label>'+
+      '<label for="city" class="input-description">City:</label>' +
       '<input id="city" class="swal2-input" placeholder="City">' +
-      '<label for="state" class="input-description">State(Abbreviation):</label>'+
+      '<label for="state" class="input-description">State(Abbreviation):</label>' +
       '<input id="state" class="swal2-input" placeholder="State(Abbreviation)">' +
-      '<label for="zip" class="input-description">Zip-Code:</label>'+
-      '<input id="zip" class="swal2-input" placeholder="Zip-Code">'+
+      '<label for="zip" class="input-description">Zip-Code:</label>' +
+      '<input id="zip" class="swal2-input" placeholder="Zip-Code">' +
       '<div class="input-description">** denotes required fields</div>',
     focusConfirm: false,
     showCloseButton: true,
@@ -466,11 +466,11 @@ function searchContact(page) {
               table +=
                 '<td><button type="button" class="btn btn-outline-secondary" onclick="editBox(' +
                 jsonObject.results[i].id +
-                ')">Edit</button>';
+                ');setCount();">Edit</button>';
               table +=
                 '<button type="button" class="btn btn-outline-danger" onclick="deleteBox(' +
                 jsonObject.results[i].id +
-                ')">Del</button></td>';
+                ');setCount();">Del</button></td>';
               table += "</tr>";
             }
           }

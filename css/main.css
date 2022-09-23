@@ -49,6 +49,12 @@ a:hover {
   text-decoration: underline;
 }
 
+.input-description {
+  font-size: large;
+  padding: 0 50px;
+  padding-top: 10px;
+}
+
 .err {
   background: rgb(245, 201, 201);
   border: 2px solid darkred;

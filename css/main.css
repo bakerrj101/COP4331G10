@@ -1,0 +1,78 @@
+.nav-button {
+  color: black;
+  background-color: goldenrod;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.nav-button:hover {
+  border-color: white;
+  background-color: gold;
+}
+
+body {
+  font-size: 1.25rem;
+  background-color: #f6f8fa;
+}
+
+td {
+  line-height: 3rem;
+}
+
+.welcomeMessage {
+  text-align: center;
+  font-weight: 600;
+  font-size: 24px;
+  padding: 20px 40px;
+  white-space: pre;
+  display: inline-block;
+}
+
+img {
+  border-radius: 50%;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Chakra Petch";
+}
+a {
+  color: darkgoldenrod;
+  text-decoration: underline;
+  padding: 0px 10px;
+}
+
+a:hover {
+  color: gold;
+  text-decoration: underline;
+}
+
+.input-description {
+  font-size: large;
+  padding: 0 50px;
+  padding-top: 10px;
+}
+
+.err {
+  background: rgb(245, 201, 201);
+  border: 2px solid darkred;
+  color: black;
+}
+
+.emsg {
+  text-align: center;
+  color: darkred;
+  font-weight: bold;
+}
+
+.swal-wide {
+  width: 600px !important;
+}
+
+label {
+  display: inline-block;
+  width: 175px;
+  text-align: left;
+}
